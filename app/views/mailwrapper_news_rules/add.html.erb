@@ -1,0 +1,7 @@
+<h2><%= l(:label_mailwrapper_news_rule_new) %></h2>
+
+<% labelled_tabular_form_for :mailwrapper_news_rule, @mailwrapper_news_rule, :url => {:action => 'add', :project_id => @project} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= submit_tag l(:button_create) %>
+<% end %>
+

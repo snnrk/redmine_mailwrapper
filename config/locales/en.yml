@@ -1,0 +1,37 @@
+# English strings go here for Rails i18n
+en:
+  mailwrapper: mailwrapper
+  project_module_mailwrapper: mailwrapper
+  permission_manage_mailwrapper: "Manage Settings"
+  permission_view_mailwrapper: "View Settings"
+
+  field_recipient: Recipient
+  field_sender: Sender
+  field_user_ids: :field_user
+  field_tracker_ids: :field_tracker
+  field_issue_category_ids: :field_category
+  field_issue_status_ids: :field_status
+  field_author_ids: :field_author
+  field_mailwrapper_recipient: :field_recipient
+
+  label_mailwrapper_issue_rules_new: "New rule"
+  label_mailwrapper_issue_rule_edit: "Edit rule"
+  label_mailwrapper_news_rule_new: "New rule"
+  label_mailwrapper_news_rule_edit: "Edit rule"
+  label_mailwrapper_recipient_new: "New recipient"
+  label_mailwrapper_recipient_edit: "Edit recipient"
+  label_mailwrapper_sender_new: "New sender"
+  label_mailwrapper_sender_edit: "Edit sender"
+
+  notice_failed_to_save_mailwrapper_recipient: "Failed to regist recipient (duplicated name)."
+
+  text_maiwlrapper_issue_rules: "These rules are evaluated in an order from a top."
+
+  activerecord:
+    errors:
+      models:
+        mailwrapper_recipient:
+          attributes:
+            name:
+              is_blank: "is blank."
+              is_duplicated: "is duplicated."

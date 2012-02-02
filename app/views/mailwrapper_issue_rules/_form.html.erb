@@ -1,0 +1,33 @@
+<%= error_messages_for 'mailwrapper_issue_rule' %>
+<% members = @project.member_principals.find(:all, :conditions => ['type = "User"']).sort %>
+<% issue_statuses = IssueStatus.find(:all) %>
+  <div class="box">
+    <p>
+      <%= f.label :tracker_ids %>
+      <%= select_tag('mailwrapper_issue_rule[tracker_ids][]',
+          options_from_collection_for_select(@project.trackers, :id, :name, @mailwrapper_issue_rule.trackers.map{|t| t.id}),
+          { :id => :mailwrapper_issue_rule_tracker_ids, :multiple => true }) %>
+    </p>
+    <% unless @project.issue_categories.empty? %>
+      <p>
+        <%= f.label :issue_category_ids %>
+        <%= f.collection_select(:issue_category_ids, @project.issue_categories, :id, :name,
+            { :required => true }, { :multiple => true, :name => 'mailwrapper_issue_rule[issue_category_ids][]' }) %>
+      </p>
+    <% end %>
+    <p>
+      <%= f.label :issue_status_ids %>
+      <%= f.collection_select(:issue_status_ids, issue_statuses, :id, :name,
+          { :required => true }, { :multiple => true, :name => 'mailwrapper_issue_rule[issue_status_ids][]' }) %>
+    </p>
+    <p>
+      <%= f.label :user_ids %>
+      <%= f.collection_select(:user_ids, members.map, :user_id, :principal,
+          { :required => true }, { :multiple => true, :name => 'mailwrapper_issue_rule[user_ids][]' }) %>
+    </p>
+    <p>
+      <%= f.label :mailwrapper_recipient_id %>
+      <%= f.select :mailwrapper_recipient_id, @project.mailwrapper_recipients.collect {|c| [c.name, c.id]}, :include_blank => false %>
+    </p>
+  </div>
+<%= f.hidden_field :project_id, :value => @project.id %>

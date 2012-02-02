@@ -1,0 +1,8 @@
+= redmine_mailwrapper
+Plugin for Redmine to rewrite mail according to rules for each projects. 
+
+== Features
+- Rewite sender/recipients in e-mail
+
+== Note
+- I tested this plugin on Redmine 1.3.0 + MySQL 

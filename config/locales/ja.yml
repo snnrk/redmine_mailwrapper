@@ -1,0 +1,38 @@
+# Japanese strings go here for Rails i18n
+ja:
+  mailwrapper: mailwrapper
+  project_module_mailwrapper: mailwrapper
+  permission_manage_mailwrapper: 設定の編集
+  permission_view_mailwrapper: 設定の閲覧
+
+  field_recipient: 宛先
+  field_sender: 差出人
+  field_user_ids: :field_user
+  field_tracker_ids: :field_tracker
+  field_issue_category_ids: :field_category
+  field_issue_status_ids: :field_status
+  field_author_ids: :field_author
+  field_mailwrapper_recipient: :field_recipient
+
+  label_mailwrapper_issue_rule_new: 新しいルールを作成
+  label_mailwrapper_issue_rule_edit: ルールを編集
+  label_mailwrapper_news_rule_new: 新しいルールを作成
+  label_mailwrapper_news_rule_edit: ルールを編集
+  label_mailwrapper_recipient_new: 新しい宛先を作成
+  label_mailwrapper_recipient_edit: 宛先を編集
+  label_mailwrapper_sender_new: 新しい差出人を作成
+  label_mailwrapper_sender_edit: 差出人を編集
+
+
+  notice_failed_to_save_mailwrapper_recipient: 宛先の登録に失敗しました。(名前が重複しています)
+
+  text_maiwlrapper_issue_rules: ルールは上から順に評価されます。
+
+  activerecord:
+    errors:
+      models:
+        mailwrapper_recipient:
+          attributes:
+            name:
+              is_blank: が入力されていません。
+              is_duplicated: が重複しています。

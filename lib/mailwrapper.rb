@@ -1,0 +1,8 @@
+require 'mailwrapper/mailer_patch'
+require 'mailwrapper/project_patch'
+require 'mailwrapper/issue_category_patch'
+require 'mailwrapper/issue_status_patch'
+require 'mailwrapper/tracker_patch'
+require 'mailwrapper/user_patch'
+require 'mailwrapper/projects_helper_patch'
+require 'mailwrapper/util'

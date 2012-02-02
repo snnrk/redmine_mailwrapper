@@ -1,0 +1,8 @@
+<% @mailwrapper_recipients  = MailwrapperRecipient.find(:all, :conditions => ['project_id = ?', @project.id]) %>
+<% unless @mailwrapper_recipients.empty? %>
+  <%= render :partial => 'mailwrapper_issue_rules/show' %>
+  <%= render :partial => 'mailwrapper_news_rules/show' %>
+<% end %>
+<%= render :partial => 'mailwrapper_recipients/show' %>
+<%= render :partial => 'mailwrapper_senders/show' %>
+
