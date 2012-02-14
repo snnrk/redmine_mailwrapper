@@ -14,7 +14,7 @@ en:
   field_author_ids: :field_author
   field_mailwrapper_recipient: :field_recipient
 
-  label_mailwrapper_issue_rules_new: "New rule"
+  label_mailwrapper_issue_rule_new: "New rule"
   label_mailwrapper_issue_rule_edit: "Edit rule"
   label_mailwrapper_news_rule_new: "New rule"
   label_mailwrapper_news_rule_edit: "Edit rule"
