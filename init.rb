@@ -44,7 +44,7 @@ Redmine::Plugin.register :redmine_mailwrapper do
   name 'Redmine mailwrapper plugin'
   author 'OSANAI Noriaki'
   description 'Plugin for Redmine to rewrite mail according to rules for each projects.'
-  version '0.1.0'
+  version '0.1.1'
   requires_redmine :version_or_higher => '1.2.0'
 
   project_module :mailwrapper do
