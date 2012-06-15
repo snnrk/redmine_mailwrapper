@@ -6,7 +6,7 @@ module MailwrapperMailerPatch
 		alias_method_chain :issue_edit, :mailwrapper if self.method_defined? :issue_edit
 		alias_method_chain :news_added, :mailwrapper if self.method_defined? :news_added
 		alias_method_chain :news_comment_added, :mailwrapper if self.method_defined? :news_comment_added
-		alias_method_chain :create_mail, :mailwrapper
+		alias_method_chain :mail, :mailwrapper
 	 end
   end
 end
@@ -35,8 +35,8 @@ module MailwrapperMailerMethods
 	 set_flag(comment)
 	 news_comment_added_without_mailwrapper(comment)
   end
-  def create_mail_with_mailwrapper
-	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: create_mail()"
+  def mail_with_mailwrapper
+	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: mail()"
 	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: parameters: #{@mailwrapperflag.inspect}"
 	 unless @mailwrapperflag.nil?
 		begin
@@ -71,14 +71,14 @@ module MailwrapperMailerMethods
 			 headers["X-Redmine-Mailwrapper-Version"] = Redmine::Plugin.find(:redmine_mailwrapper).version
 			 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: Sending email notification to: #{notified_users.join(', ')}"
 			 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: call super"
-			 return self.class.superclass.instance_method(:create_mail).bind(self).call
+			 return self.class.superclass.instance_method(:mail).bind(self).call
 		  end
 		rescue
 		  RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: mailwrapper_get_recipients() failed."
 		end
 	 end
-	 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: call create_mail_without_mailwrapper."
-	 create_mail_without_mailwrapper
+	 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: call mail_without_mailwrapper."
+	 mail_without_mailwrapper
   end
 
   private
