@@ -1,6 +1,6 @@
 <h2><%= l(:label_mailwrapper_sender_edit) %></h2>
 
-<% labelled_tabular_form_for :mailwrapper_sender, @mailwrapper_sender, :url => {:action => 'mod', :sender_id => @mailwrapper_sender.id, :project_id => @project} do |f| %>
+<% labelled_form_for :mailwrapper_sender, @mailwrapper_sender, :url => {:action => 'mod', :sender_id => @mailwrapper_sender.id, :project_id => @project} do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <%= f.hidden_field :id, :value => @mailwrapper_sender.id %>
   <%= submit_tag l(:button_update) %>

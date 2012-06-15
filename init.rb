@@ -1,8 +1,7 @@
 require 'redmine'
 require 'mailwrapper'
 
-require 'dispatcher'
-Dispatcher.to_prepare :redmine_mailwrapper do
+Rails.configuration.to_prepare do
   require_dependency 'mailer'
   unless Mailer.included_modules.include? MailwrapperMailerPatch
     Mailer.send(:include, MailwrapperMailerPatch)
