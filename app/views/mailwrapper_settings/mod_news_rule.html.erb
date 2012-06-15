@@ -1,9 +1,0 @@
-<h2><%= l(:label_mailwrapper_news_rule_edit) %></h2>
-
-<% labelled_tabular_form_for :mailwrapper_news_rule, @news_rule, :url => {:action => 'mod_news_rule', :news_rule_id => @news_rule.id, :project_id => @project} do |f| %>
-  <%= error_messages_for 'mailwrapper_news_rule' %>
-  <%= render :partial => 'form_news_rule', :locals => {:f => f} %>
-  <%= f.hidden_field :id, :value => @news_rule.id %>
-  <%= submit_tag l(:button_update) %>
-<% end %>
-
