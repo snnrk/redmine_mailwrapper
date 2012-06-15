@@ -1,9 +1,0 @@
-  <div class="box">
-    <p><%= f.select :tracker_id, @project.trackers.collect {|c| [c.name, c.id]}, :include_blank => true %></p>
-	<% unless @project.issue_categories.empty? %>
-      <p><%= f.select :category_id, @project.issue_categories.collect {|c| [c.name, c.id]}, :include_blank => true %></p>
-	<% end %>
-    <p><%= f.select :status_id, @issue_statuses.collect {|c| [c.name, c.id]}, :include_blank => true %></p>
-    <p><%= f.text_field :author, :value => '.*', :required => true %></p>
-    <p><%= f.select :recipient_id, @recipients.collect {|c| [c.name, c.id]}, :include_blank => false %></p>
-  </div>

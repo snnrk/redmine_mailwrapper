@@ -1,9 +1,0 @@
-<h2><%= l(:label_mailwrapper_issue_rule_edit) %></h2>
-
-<% labelled_tabular_form_for :mailwrapper_issue_rule, @issue_rule, :url => {:action => 'mod_issue_rule', :project_id => @project, :issue_rule_id => @issue_rule.id } do |f| %>
-  <%= error_messages_for 'mailwrapper_issue_rule' %>
-  <%= f.hidden_field :id, :value => @issue_rule.id %>
-  <%= render :partial => 'form_issue_rule', :locals => {:f => f} %>
-  <%= submit_tag l(:button_update) %>
-<% end %>
-

@@ -1,4 +1,0 @@
-  <div class="box">
-    <p><%= f.select :recipient_id, (@recipients.collect {|c| [c.name, c.id]}), :include_blank => false %>
-    <%= f.hidden_field :project_id, :value => @project.id %>
-  </div>

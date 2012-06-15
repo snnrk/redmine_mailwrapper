@@ -1,9 +1,0 @@
-<h2><%= l(:label_mailwrapper_recipient_edit) %></h2>
-
-<% labelled_tabular_form_for :mailwrapper_recipient, @recipient, :url => {:action => 'mod_recipient', :recipient_id => @recipient.id, :project_id => @project} do |f| %>
-  <%= error_messages_for 'mailwrapper_recipient' %>
-  <%= f.hidden_field :id, :value => @recipient.id %>
-  <%= render :partial => 'form_recipient', :locals => { :f => f } %>
-  <%= submit_tag l(:button_update) %>
-<% end %>
-
