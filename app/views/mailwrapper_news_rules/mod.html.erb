@@ -4,5 +4,6 @@
   <%= render :partial => 'form', :locals => {:f => f} %>
   <%= f.hidden_field :id, :value => @mailwrapper_news_rule.id %>
   <%= submit_tag l(:button_update) %>
+  <%= link_to l(:button_cancel), :controller => 'projects', :action => 'settings', :id => @project.id, :tab => 'mailwrapper' %>
 <% end %>
 
