@@ -16,9 +16,10 @@ class MailwrapperIssueRulesController < ApplicationController
   end
   
   def mod
-    @mailwrapper_issue_rule = MailwrapperIssueRule.find(params[:issue_rule_id])
+    @mailwrapper_issue_rule = MailwrapperIssueRule.find(params[:id])
     if ! (request.get? || request.xhr?)
       param = params[:mailwrapper_issue_rule]
+      @mailwrapper_issue_rule.project_id = @project.id
       @mailwrapper_issue_rule.issue_categories.clear if (param[:issue_category_ids].nil? && @mailwrapper_issue_rule.issue_categories.size)
       @mailwrapper_issue_rule.issue_statuses.clear if (param[:issue_status_ids].nil? && @mailwrapper_issue_rule.issue_statuses.size)
       @mailwrapper_issue_rule.trackers.clear if (param[:tracker_ids].nil? && @mailwrapper_issue_rule.trackers.size)
@@ -33,7 +34,7 @@ class MailwrapperIssueRulesController < ApplicationController
   end
 
   def mov
-    @mailwrapper_issue_rule = MailwrapperIssueRule.find(params[:issue_rule_id])
+    @mailwrapper_issue_rule = MailwrapperIssueRule.find(params[:id])
     case params[:position]
       when 'highest'
         @mailwrapper_issue_rule.move_to_top
@@ -48,7 +49,7 @@ class MailwrapperIssueRulesController < ApplicationController
   end
 
   def del
-    mailwrapper_issue_rule = MailwrapperIssueRule.find(params[:issue_rule_id])
+    mailwrapper_issue_rule = MailwrapperIssueRule.find(params[:id])
     if mailwrapper_issue_rule.nil? or ! mailwrapper_issue_rule.destroy
       flash.now[:error] = l(:gui_validation_error)
     else

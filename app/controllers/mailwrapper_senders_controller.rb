@@ -8,6 +8,7 @@ class MailwrapperSendersController < ApplicationController
   def add
     @mailwrapper_sender = MailwrapperSender.new(params[:mailwrapper_sender])
     if ! (request.get? || request.xhr?)
+      @mailwrapper_sender.project_id = @project.id
       if ! @mailwrapper_sender.sender.empty? && @mailwrapper_sender.save
         flash[:notice] = l(:notice_successful_create)
         redirect_to({ :controller => 'projects', :action => 'settings', :id => @project, :tab => 'mailwrapper' })
@@ -19,8 +20,9 @@ class MailwrapperSendersController < ApplicationController
   end
 
   def mod
-    @mailwrapper_sender = MailwrapperSender.find(params[:sender_id])
+    @mailwrapper_sender = MailwrapperSender.find(params[:id])
     if ! (request.get? || request.xhr?)
+      @mailwrapper_sender.project_id = @project.id
       if @mailwrapper_sender.update_attributes(params[:mailwrapper_sender])
         flash[:notice] = l(:notice_successful_update)
         redirect_to({ :controller => 'projects', :action => 'settings', :id => @project, :tab => 'mailwrapper' })
@@ -33,7 +35,7 @@ class MailwrapperSendersController < ApplicationController
   end
 
   def del
-    mailwrapper_sender = MailwrapperSender.find(params[:sender_id])
+    mailwrapper_sender = MailwrapperSender.find(params[:id])
     if mailwrapper_sender.nil? or ! mailwrapper_sender.destroy
       flash.now[:error] = l(:gui_validation_error)
     else

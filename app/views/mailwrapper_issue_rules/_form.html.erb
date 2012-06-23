@@ -30,4 +30,3 @@
       <%= f.select :mailwrapper_recipient_id, @project.mailwrapper_recipients.collect {|c| [c.name, c.id]}, :include_blank => false %>
     </p>
   </div>
-<%= f.hidden_field :project_id, :value => @project.id %>

@@ -4,8 +4,8 @@ class MailwrapperNewsRulesController < ApplicationController
 
   def add
     @mailwrapper_news_rule = MailwrapperNewsRule.new(params[:mailwrapper_news_rule])
- 
     if ! (request.get? || request.xhr?)
+      @mailwrapper_news_rule.project_id = @project.id
       if @mailwrapper_news_rule.save
         flash[:notice] = l(:notice_successful_create)
         redirect_to({ :controller => 'projects', :action => 'settings', :id => @project, :tab => 'mailwrapper' })
@@ -16,8 +16,9 @@ class MailwrapperNewsRulesController < ApplicationController
   end
 
   def mod
-    @mailwrapper_news_rule = MailwrapperNewsRule.find(params[:news_rule_id])
+    @mailwrapper_news_rule = MailwrapperNewsRule.find(params[:id])
     if ! (request.get? || request.xhr?)
+      @mailwrapper_news_rule.project_id = @project.id
       if @mailwrapper_news_rule.update_attributes(params[:mailwrapper_news_rule])
         flash[:notice] = l(:notice_successful_update)
         redirect_to({ :controller => 'projects', :action => 'settings', :id => @project, :tab => 'mailwrapper' })
@@ -28,7 +29,7 @@ class MailwrapperNewsRulesController < ApplicationController
   end
 
   def del
-    mailwrapper_news_rule = MailwrapperNewsRule.find(params[:news_rule_id])
+    mailwrapper_news_rule = MailwrapperNewsRule.find(params[:id])
     if mailwrapper_news_rule.nil? or ! mailwrapper_news_rule.destroy
       flash.now[:error] = l(:gui_validation_error)
     else

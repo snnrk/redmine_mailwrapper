@@ -17,8 +17,9 @@ class MailwrapperRecipientsController < ApplicationController
   end
 
   def mod
-    @mailwrapper_recipient = MailwrapperRecipient.find(params[:recipient_id])
+    @mailwrapper_recipient = MailwrapperRecipient.find(params[:id])
     if ! (request.get? || request.xhr?)
+      @mailwrapper_recipient.project_id = @project.id
       @mailwrapper_recipient.users.clear if (params[:mailwrapper_recipient][:user_ids].nil? && @mailwrapper_recipient.users.size)
       if @mailwrapper_recipient.update_attributes(params[:mailwrapper_recipient])
         flash[:notice] = l(:notice_successful_update)
@@ -30,7 +31,7 @@ class MailwrapperRecipientsController < ApplicationController
   end
 
   def del
-    mailwrapper_recipient = MailwrapperRecipient.find(params[:recipient_id])
+    mailwrapper_recipient = MailwrapperRecipient.find(params[:id])
     if mailwrapper_recipient.nil? or ! mailwrapper_recipient.destroy
       flash.now[:error] = l(:gui_validation_error)
     else
