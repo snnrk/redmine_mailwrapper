@@ -1,8 +1,8 @@
 <h2><%= l(:label_mailwrapper_news_rule_edit) %></h2>
 
-<% labelled_form_for :mailwrapper_news_rule, @mailwrapper_news_rule, :url => {:action => 'mod', :news_rule_id => @mailwrapper_news_rule.id, :project_id => @project} do |f| %>
+<%= labelled_form_for :mailwrapper_news_rule, @mailwrapper_news_rule, :url => {:action => 'mod', :id => @mailwrapper_news_rule.id, :project_id => @project.id} do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
-  <%= f.hidden_field :id, :value => @mailwrapper_news_rule.id %>
   <%= submit_tag l(:button_update) %>
+  <%= link_to l(:button_cancel), :controller => 'projects', :action => 'settings', :id => @project.id, :tab => 'mailwrapper' %>
 <% end %>
 
