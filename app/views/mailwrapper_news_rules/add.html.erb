@@ -3,5 +3,6 @@
 <% labelled_tabular_form_for :mailwrapper_news_rule, @mailwrapper_news_rule, :url => {:action => 'add', :project_id => @project} do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
   <%= submit_tag l(:button_create) %>
+  <%= link_to l(:button_cancel), :controller => 'projects', :action => 'settings', :id => @project.id, :tab => 'mailwrapper' %>
 <% end %>
 
