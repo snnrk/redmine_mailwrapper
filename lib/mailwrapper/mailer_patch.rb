@@ -16,32 +16,32 @@ module MailwrapperMailerMethods
   ## for alias_method_chain
   ##
   def issue_add_with_mailwrapper(issue)
-	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: issue_add()."
+	 Rails.logger.info "redmine_mailwrapper: issue_add()."
 	 set_flag(issue)
 	 issue_add_without_mailwrapper(issue)
   end
   def issue_edit_with_mailwrapper(journal)
-	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: issue_edit()."
+	 Rails.logger.info "redmine_mailwrapper: issue_edit()."
 	 set_flag(journal)
 	 issue_edit_without_mailwrapper(journal)
   end
   def news_added_with_mailwrapper(news)
-	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: news_added()."
+	 Rails.logger.info "redmine_mailwrapper: news_added()."
 	 set_flag(news)
 	 news_added_without_mailwrapper(news)
   end
   def news_comment_added_with_mailwrapper(comment)
-	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: news_comment_added()."
+	 Rails.logger.info "redmine_mailwrapper: news_comment_added()."
 	 set_flag(comment)
 	 news_comment_added_without_mailwrapper(comment)
   end
   def mail_with_mailwrapper
-	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: mail()"
-	 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: parameters: #{@mailwrapperflag.inspect}"
+	 Rails.logger.info "redmine_mailwrapper: mail()"
+	 Rails.logger.info "redmine_mailwrapper: parameters: #{@mailwrapperflag.inspect}"
 	 unless @mailwrapperflag.nil?
 		begin
 		  mailwrapper_sender = mailwrapper_get_sender(@mailwrapperflag)
-		  RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: from=#{mailwrapper_sender}."
+		  Rails.logger.debug "redmine_mailwrapper: from=#{mailwrapper_sender}."
 		  from mailwrapper_sender unless mailwrapper_sender.nil?
 
 		  mailwrapper_recipients = mailwrapper_get_recipients(@mailwrapperflag)
@@ -69,15 +69,15 @@ module MailwrapperMailerMethods
 			 end
 			 notified_users = [recipients, cc].flatten.compact.uniq
 			 headers["X-Redmine-Mailwrapper-Version"] = Redmine::Plugin.find(:redmine_mailwrapper).version
-			 RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: Sending email notification to: #{notified_users.join(', ')}"
-			 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: call super"
+			 Rails.logger.info "redmine_mailwrapper: Sending email notification to: #{notified_users.join(', ')}"
+			 Rails.logger.debug "redmine_mailwrapper: call super"
 			 return self.class.superclass.instance_method(:mail).bind(self).call
 		  end
 		rescue
-		  RAILS_DEFAULT_LOGGER.info "redmine_mailwrapper: mailwrapper_get_recipients() failed."
+		  Rails.logger.info "redmine_mailwrapper: mailwrapper_get_recipients() failed."
 		end
 	 end
-	 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: call mail_without_mailwrapper."
+	 Rails.logger.debug "redmine_mailwrapper: call mail_without_mailwrapper."
 	 mail_without_mailwrapper
   end
 
@@ -110,7 +110,7 @@ module MailwrapperMailerMethods
 
   def mailwrapper_get_recipients(flag)
 	 return nil if flag.nil?
-	 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: type=#{flag[:type]}"
+	 Rails.logger.debug "redmine_mailwrapper: type=#{flag[:type]}"
 	 case flag[:type]
 	 when :news
 		return mailwrapper_get_news_recipient(flag[:project])
@@ -118,14 +118,14 @@ module MailwrapperMailerMethods
 		return mailwrapper_get_issue_recipient(flag)
 	 end
 	 
-	 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: unknown route."
+	 Rails.logger.debug "redmine_mailwrapper: unknown route."
 	 nil
   end
   def mailwrapper_get_news_recipient(project)
 	 begin
 		return Project.find(project.to_s).mailwrapper_news_rule.mailwrapper_recipient.users
 	 rescue
-		RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: mailwrapper_get_news_recipient failed."
+		Rails.logger.debug "redmine_mailwrapper: mailwrapper_get_news_recipient failed."
 		return nil
 	 end
   end
@@ -133,33 +133,33 @@ module MailwrapperMailerMethods
 	 project = Project.find(flag[:project].to_s)
 	 unless (project.mailwrapper_issue_rules.empty?)
 		project.mailwrapper_issue_rules.each do |r|
-		  RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: rule_id=#{r.id}"
+		  Rails.logger.debug "redmine_mailwrapper: rule_id=#{r.id}"
 		  next if (! r.trackers.empty? and r.trackers.select {|t| t.id == flag[:tracker]}.empty?)
-		  RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: tracker mismatch"
+		  Rails.logger.debug "redmine_mailwrapper: tracker mismatch"
 		  next if (! r.issue_categories.nil? and ! r.issue_categories.empty? and r.issue_categories.select {|c| c.id == flag[:category]}.empty?)
-		  RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: category mismatch"
+		  Rails.logger.debug "redmine_mailwrapper: category mismatch"
 		  next if (! r.issue_statuses.empty? and r.issue_statuses.select {|s| s.id == flag[:statuses]}.empty?)
-		  RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: status mismatch"
+		  Rails.logger.debug "redmine_mailwrapper: status mismatch"
 		  next if (! r.users.empty? and r.users.select {|u| u.login == flag[:author]}.empty?)
-		  RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: user mismatch"
+		  Rails.logger.debug "redmine_mailwrapper: user mismatch"
 		  begin
 			 return r.mailwrapper_recipient.users
 		  rescue
-			 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: mailwrapper_get_issue_recipient failed."
+			 Rails.logger.debug "redmine_mailwrapper: mailwrapper_get_issue_recipient failed."
 			 return nil
 		  end
 		end
 	 else
-		RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: no issue rule."
+		Rails.logger.debug "redmine_mailwrapper: no issue rule."
 	 end
-	 RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: unknown route."
+	 Rails.logger.debug "redmine_mailwrapper: unknown route."
 	 nil
   end
   def mailwrapper_get_sender(flag)
 	 begin
 		Project.find(flag[:project].to_s).mailwrapper_sender.sender.to_s
 	 rescue
-		RAILS_DEFAULT_LOGGER.debug "redmine_mailwrapper: mailwrapper_get_sender() failed."
+		Rails.logger.debug "redmine_mailwrapper: mailwrapper_get_sender() failed."
 		nil
 	 end
   end
