@@ -68,7 +68,7 @@
   <% end %>
   </tbody>
 </table>
-<p><%= link_to_if_authorized l(:label_mailwrapper_issue_rule_new), {:controller => 'mailwrapper_issue_rules', :action => 'add', :mailwrapper_issue_rule => { :project_id => @project.id }, } %></p>
+<p><%= link_to_if_authorized l(:label_mailwrapper_issue_rule_new), {:controller => 'mailwrapper_issue_rules', :action => 'add', :project_id => @project.id} %></p>
 </fieldset>
 </div>
 
