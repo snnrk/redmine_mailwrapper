@@ -22,7 +22,7 @@ module MailwrapperMailerMethods
   def issue_edit_with_mailwrapper(journal)
     Rails.logger.info "redmine_mailwrapper: issue_edit()."
     mail = issue_edit_without_mailwrapper(journal)
-    mailwrapper_rewrite_issue(mail, jounal.journalized, journal.user.login)
+    mailwrapper_rewrite_issue(mail, journal.journalized, journal.user.login)
   end
   def news_added_with_mailwrapper(news)
     Rails.logger.info "redmine_mailwrapper: news_added()."
