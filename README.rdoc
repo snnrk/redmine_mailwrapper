@@ -1,8 +1,10 @@
 = redmine_mailwrapper
-Plugin for Redmine to rewrite mail according to rules for each projects. 
+redmine_mailwrapper is plugin for redmine, that rewrites sender and recipients of mail notifications according to rules for each projects.
+This plugin affects to issues and news.
 
 == Features
-- Rewite sender/recipients in e-mail
+- Rewite sender/recipients of mail notification.
 
 == Note
-- I tested this plugin on Redmine 1.3.0 + MySQL 
+- I tested this plugin on Redmine 2.0.2 + MySQL
+
