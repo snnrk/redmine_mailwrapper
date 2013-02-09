@@ -1,4 +1,3 @@
-require 'mailwrapper/mailer_patch'
 require 'mailwrapper/project_patch'
 require 'mailwrapper/issue_category_patch'
 require 'mailwrapper/issue_status_patch'
@@ -6,3 +5,8 @@ require 'mailwrapper/tracker_patch'
 require 'mailwrapper/user_patch'
 require 'mailwrapper/projects_helper_patch'
 require 'mailwrapper/util'
+require 'mailwrapper/issue_observer_patch'
+require 'mailwrapper/journal_observer_patch'
+require 'mailwrapper/news_observer_patch'
+require 'mailwrapper/comment_observer_patch'
+

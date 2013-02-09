@@ -2,11 +2,6 @@ require 'redmine'
 require 'mailwrapper'
 
 Rails.configuration.to_prepare do
-  require_dependency 'mailer'
-  unless Mailer.included_modules.include? MailwrapperMailerPatch
-    Mailer.send(:include, MailwrapperMailerPatch)
-  end
-
   require_dependency 'project'
   unless Project.included_modules.include? MailwrapperProjectPatch
     Project.send(:include, MailwrapperProjectPatch)
@@ -35,6 +30,26 @@ Rails.configuration.to_prepare do
   require_dependency 'user'
   unless User.included_modules.include? MailwrapperUserPatch
     User.send(:include, MailwrapperUserPatch)
+  end
+
+  require_dependency 'issue_observer'
+  unless IssueObserver.included_modules.include? MailwrapperIssueObserverPatch
+    IssueObserver.send(:include, MailwrapperIssueObserverPatch)
+  end
+
+  require_dependency 'journal_observer'
+  unless JournalObserver.included_modules.include? MailwrapperJournalObserverPatch
+    JournalObserver.send(:include, MailwrapperJournalObserverPatch)
+  end
+
+  require_dependency 'news_observer'
+  unless NewsObserver.included_modules.include? MailwrapperNewsObserverPatch
+    NewsObserver.send(:include, MailwrapperNewsObserverPatch)
+  end
+
+  require_dependency 'comment_observer'
+  unless CommentObserver.included_modules.include? MailwrapperCommentObserverPatch
+    CommentObserver.send(:include, MailwrapperCommentObserverPatch)
   end
 end
 
