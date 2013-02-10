@@ -22,10 +22,10 @@
       </td>
       <td align="center" style="width:5%;">
         <%= link_to_if_authorized l(:button_update),
-                    { :controller => :mailwrapper_recipients, :action => 'mod', :id => r.id, :project_id => @project.id },
+                    { :controller => :mailwrapper_recipients, :action => 'mod', :id => r.id, :project_id => @project },
                     :class => "icon icon-edit" %>
         <%= link_to_if_authorized l(:button_delete),
-                    { :controller => :mailwrapper_recipients, :action => 'del', :id => r.id, :project_id => @project.id },
+                    { :controller => :mailwrapper_recipients, :action => 'del', :id => r.id, :project_id => @project },
                     :method => :post,
                     :confirm => l(:text_are_you_sure),
                     :class => "icon icon-del" %>
@@ -35,7 +35,7 @@
   </tbody>
 </table>
 <% end %>
-<p><%= link_to_if_authorized l(:label_mailwrapper_recipient_new), {:controller => 'mailwrapper_recipients', :action => 'add', :project_id => @project.id } %></p>
+<p><%= link_to_if_authorized l(:label_mailwrapper_recipient_new), {:controller => 'mailwrapper_recipients', :action => 'add', :project_id => @project } %></p>
 </fieldset>
 </div>
 

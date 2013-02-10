@@ -3,7 +3,7 @@
 <legend><%= l(:field_sender) %></legend>
 <% if @project.mailwrapper_sender.nil? %>
   <p class="nodata"><%= l(:label_no_data) %></p>
-  <p><%= link_to_if_authorized l(:label_mailwrapper_sender_new), {:controller => 'mailwrapper_senders', :action => 'add', :mailwrapper_sender => { :project_id => @project } } %></p>
+  <p><%= link_to_if_authorized l(:label_mailwrapper_sender_new), { :controller => 'mailwrapper_senders', :action => 'add', :project_id => @project } %></p>
 <% else %>
 <table class="list">
   <thead>
@@ -17,10 +17,10 @@
       <td><%= h(@project.mailwrapper_sender.sender) %></td>
       <td align="center" style="width:5%;">
         <%= link_to_if_authorized l(:button_update),
-                    { :controller => :mailwrapper_senders, :action => 'mod', :id => @project.mailwrapper_sender.id, :project_id => @project.id },
+                    { :controller => :mailwrapper_senders, :action => 'mod', :id => @project.mailwrapper_sender.id, :project_id => @project },
                       :class => "icon icon-edit" %>
         <%= link_to_if_authorized l(:button_delete),
-                    { :controller => :mailwrapper_senders, :action => 'del', :id => @project.mailwrapper_sender.id, :project_id => @project.id },
+                    { :controller => :mailwrapper_senders, :action => 'del', :id => @project.mailwrapper_sender.id, :project_id => @project },
                       :method => :post,
                       :confirm => l(:text_are_you_sure),
                       :class => "icon icon-del" %>

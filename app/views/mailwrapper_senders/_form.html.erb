@@ -1,2 +1,3 @@
 <%= error_messages_for 'mailwrapper_sender' %>
+<%= f.hidden_field :project_id, :value => @project.id %>
 <p><%= f.text_field :sender, :required => true %></p>

@@ -4,7 +4,7 @@
     <% if @project.mailwrapper_news_rule.nil? %>
       <p class="nodata"><%= l(:label_no_data) %></p>
       <p><%= link_to_if_authorized l(:label_mailwrapper_recipient_new),
-             { :controller => 'mailwrapper_news_rules', :action => 'add', :project_id => @project.id } %></p>
+             { :controller => 'mailwrapper_news_rules', :action => 'add', :project_id => @project } %></p>
     <% else %>
       <table class="list">
         <thead>
@@ -16,11 +16,11 @@
             <td align="center" style="width:5%;">
               <%= link_to_if_authorized l(:button_update),
                   { :controller => 'mailwrapper_news_rules', :action => 'mod',
-                    :id => @project.mailwrapper_news_rule.id, :project_id => @project.id },
+                    :id => @project.mailwrapper_news_rule.id, :project_id => @project },
                     :class => "icon icon-edit" %>
               <%= link_to_if_authorized l(:button_delete),
                   { :controller => :mailwrapper_news_rules, :action => 'del',
-                    :id => @project.mailwrapper_news_rule.id, :project_id => @project.id },
+                    :id => @project.mailwrapper_news_rule.id, :project_id => @project },
                     :method => :post,
                     :confirm => l(:text_are_you_sure),
                     :class => "icon icon-del" %>

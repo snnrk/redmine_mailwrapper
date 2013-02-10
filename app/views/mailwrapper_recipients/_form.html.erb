@@ -2,7 +2,8 @@
 <% members = @project.member_principals.find(:all, :conditions => ['type = "User"']).sort %>
 <p><%= f.text_field :name, :required => true %></p>
 <p>
-  <%= f.label :user_ids %>
+  <%= f.hidden_field :project_id, :value => @project.id %>
+  <label for="mailwrapper_recipient_user_ids"><%= l(:label_user) %></label>
   <%= f.collection_select(:user_ids, members.map, :user_id, :principal, { :required => true }, {:multiple => true, :name =>'mailwrapper_recipient[user_ids][]' }) %>
 </p>
 
