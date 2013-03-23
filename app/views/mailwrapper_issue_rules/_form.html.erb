@@ -1,5 +1,5 @@
 <%= error_messages_for 'mailwrapper_issue_rule' %>
-<% members = @project.member_principals.find(:all, :conditions => ['type = "User"']).sort %>
+<% members = @project.member_principals.find(:all, :conditions => ['type = ?', 'User']).sort %>
 <%= f.hidden_field :project_id, :value => @project.id %>
 <% issue_statuses = IssueStatus.find(:all) %>
   <div class="box">

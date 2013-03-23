@@ -1,5 +1,5 @@
 <%= error_messages_for 'mailwrapper_recipient' %>
-<% members = @project.member_principals.find(:all, :conditions => ['type = "User"']).sort %>
+<% members = @project.member_principals.find(:all, :conditions => ['type = ?', 'User']).sort %>
 <p><%= f.text_field :name, :required => true %></p>
 <p>
   <%= f.hidden_field :project_id, :value => @project.id %>
