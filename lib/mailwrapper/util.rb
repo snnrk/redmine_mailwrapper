@@ -15,7 +15,7 @@ class MailwrapperUtil
         Rails.logger.debug "redmine_mailwrapper: tracker mismatch"
         next if (! r.issue_categories.nil? and ! r.issue_categories.empty? and r.issue_categories.select {|c| c.id == flag[:category]}.empty?)
         Rails.logger.debug "redmine_mailwrapper: category mismatch"
-        next if (! r.issue_statuses.empty? and r.issue_statuses.select {|s| s.id == flag[:statuses]}.empty?)
+        next if (! r.issue_statuses.empty? and r.issue_statuses.select {|s| s.id == flag[:status]}.empty?)
         Rails.logger.debug "redmine_mailwrapper: status mismatch"
         next if (! r.users.empty? and r.users.select {|u| u.login == flag[:author]}.empty?)
         Rails.logger.debug "redmine_mailwrapper: user mismatch"
